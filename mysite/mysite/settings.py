@@ -133,3 +133,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'stockanalysiswebsite@gmail.com'
 EMAIL_HOST_PASSWORD = 'sisylanakcots'
 EMAIL_PORT = 587
+
+# if Heroku server
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config()}
