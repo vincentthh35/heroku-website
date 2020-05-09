@@ -1,0 +1,12 @@
+{% extends 'registration/message_template.html' %}
+{% load static %}
+{% autoescape off %}
+{% block message_title %}
+Hooray!
+{% endblock %}
+{% block message_content %}
+You have successfully activated your account!<br>
+Now you can login with your account.<br>
+Go back to homepage and check out what's going on!<br>
+{% endblock %}
+{% endautoescape %}

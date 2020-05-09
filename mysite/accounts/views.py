@@ -13,7 +13,6 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage
 
-
 # Create your views here.
 
 def home(request):
@@ -65,7 +64,7 @@ def signup(request):
                 mail_subject, message, to=[to_email]
             )
             email.send()
-            return HttpResponse('Please confirm your email address to complete the registration')
+            return render(request, 'registration/message_after_signup.html', {})
         else:
             for field in form:
                 for error in field.errors:
@@ -86,9 +85,9 @@ def activate(request, uidb64, token):
         user.save()
         auth.login(request, user)
         # return redirect('home')
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        return render(request, 'registration/message_after_activation.html', {})
     else:
-        return HttpResponse('Activation link is invalid!')
+        return render(request, 'registration/message_invalid_link.html', {})
 
 def hello_world(request):
     return render(request, 'hello_world.html', {

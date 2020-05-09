@@ -24,9 +24,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%-_nu(l4-q6^@e(#&f2+u_ul_4&9))yy2n+wt0^++zjcn&h=zh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+import socket
 
-ALLOWED_HOSTS = [".herokuapp.com"]
+if socket.gethostname() == "server_name":
+    DEBUG = False
+    ALLOWED_HOSTS = [".your_domain_name.com",]
+    ...
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1",]
 
 # for debugging
 LOGGING = {

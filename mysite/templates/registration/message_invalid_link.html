@@ -1,0 +1,12 @@
+{% extends 'registration/message_template.html' %}
+{% load static %}
+{% autoescape off %}
+{% block message_title %}
+Oops...
+{% endblock %}
+{% block message_content %}
+It seems something wrong happened...<br>
+Please check your email again and make sure that is the right link...<br>
+Sorry for the inconvenience...<br>
+{% endblock %}
+{% endautoescape %}
