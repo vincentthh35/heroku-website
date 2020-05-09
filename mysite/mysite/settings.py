@@ -133,8 +133,8 @@ LOGIN_REDIRECT_URL = '/'
 # configure email host server
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'stockanalysiswebsite@gmail.com'
-EMAIL_HOST_PASSWORD = 'sisylanakcots'
+EMAIL_HOST_USER = 'manager202005@gmail.com'
+EMAIL_HOST_PASSWORD = 'MD202005'
 EMAIL_PORT = 587
 
 # if Heroku server

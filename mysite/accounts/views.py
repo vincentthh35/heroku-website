@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib import auth, messages
+from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -21,7 +22,7 @@ def home(request):
 def redirect_to_home(request):
     return HttpResponseRedirect('/index/')
 
-def login(request):
+def login(request, user=None):
     if request.method == 'POST':
         form = AuthenticationForm()
         if request.user.is_authenticated:
@@ -83,7 +84,7 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        login(request, user)
+        auth.login(request, user)
         # return redirect('home')
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
