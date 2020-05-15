@@ -6,3 +6,5 @@ six
 dj-database-url
 psycopg2
 dj_static
+ffn
+yfinance
