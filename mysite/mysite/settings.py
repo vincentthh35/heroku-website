@@ -26,13 +26,8 @@ SECRET_KEY = '%-_nu(l4-q6^@e(#&f2+u_ul_4&9))yy2n+wt0^++zjcn&h=zh'
 # SECURITY WARNING: don't run with debug turned on in production!
 import socket
 
-if socket.gethostname() == "server_name":
-    DEBUG = False
-    ALLOWED_HOSTS = [".your_domain_name.com",]
-    ...
-else:
-    DEBUG = True
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1",]
+DEBUG = True
+ALLOWED_HOSTS = ['*']
 
 # for debugging
 LOGGING = {
@@ -125,8 +120,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'USER': '',
+        'PASSWORD': '',
     }
 }
+
 
 
 # Password validation
