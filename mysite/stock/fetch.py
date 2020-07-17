@@ -6,7 +6,7 @@ import pickle
 import yfinance as yf
 from .models import HistoricalPrices
 from django.conf import settings
-from sqlalchemy import create_engine
+from datetime import datetime, timezone
 
 # absolute path
 ABS_PATH = os.path.abspath(os.path.dirname(__file__))
@@ -20,11 +20,6 @@ ABS_PATH = os.path.abspath(os.path.dirname(__file__))
 #     password=password,
 #     database_name=database_name,
 # )
-
-def dump_df(target, pathname):
-    f = open(pathname, 'wb')
-    pickle.dump(target, f)
-    f.close()
 
 def fetch_df():
     res = requests.get("http://isin.twse.com.tw/isin/C_public.jsp?strMode=2")
@@ -73,6 +68,7 @@ def fetch():
     stock_df = stock_df.reset_index(drop=True)
     stock_df = stock_df[['date','ticker','open','high','low','close','volume']]
     stock_df = stock_df.astype(str)
+    database_url = os.environ
     # engine = create_engine(database_url, echo=False)
     engine = create_engine('sqlite:///db.sqlite3')
     stock_df.to_sql(HistoricalPrices, con=engine)
