@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from accounts.views import hello_world, home, redirect_to_home, login, logout, signup, activate
+from stock.views import query
 from django.views.generic import TemplateView
 
 urlpatterns = [
@@ -28,5 +29,6 @@ urlpatterns = [
             activate, name="activate"),
     path('index/', home),
     path('', redirect_to_home),
+    path('query/', query, name='query')
     # path('', TemplateView.as_view(template_name='main_template.html'))
 ]

@@ -8,3 +8,4 @@ psycopg2
 dj_static
 ffn
 yfinance
+python-dotenv
