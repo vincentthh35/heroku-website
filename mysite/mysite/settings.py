@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 from dotenv import load_dotenv
 dotenv_file = os.path.join(BASE_DIR, '.env')
 if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
+    load_dotenv(dotenv_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -181,11 +181,13 @@ django_heroku.settings(locals())
 LOGIN_REDIRECT_URL = '/'
 
 # configure email host server
-EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_HOST_USER = os.getenv('EMAIL_USERNAME')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
-EMAIL_PORT = 25
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # if Heroku server
 if 'DATABASE_URL' in os.environ:

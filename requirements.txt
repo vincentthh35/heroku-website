@@ -9,3 +9,4 @@ dj_static
 ffn
 yfinance
 python-dotenv
+sendgrid
