@@ -15,20 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from accounts.views import hello_world, home, redirect_to_home, login, logout, signup, activate
-from stock.views import query
+from accounts.views import hello_world, home, redirectToHome, login, logout, signup, activate
+from stock.views import query, showStockList
 from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/', hello_world),
     path('accounts/login/', login, name='login'),
     path('accounts/logout/', logout, name='logout'),
     path('accounts/signup/', signup, name='signup'),
     re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
             activate, name="activate"),
     path('index/', home),
-    path('', redirect_to_home),
-    path('query/', query, name='query')
+    path('', redirectToHome),
+    path('feature/stock_list/', showStockList),
+    # path('query/', query, name='query')
     # path('', TemplateView.as_view(template_name='main_template.html'))
 ]

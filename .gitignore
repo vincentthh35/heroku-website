@@ -4,5 +4,4 @@ staticfiles
 db.sqlite3
 .env
 
-./mysite/stock/migrations/
-./mysite/accounts/migrations/
+*/migrations/*

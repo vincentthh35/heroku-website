@@ -10,3 +10,4 @@ ffn
 yfinance
 python-dotenv
 sendgrid
+django-tables2

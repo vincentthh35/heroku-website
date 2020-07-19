@@ -22,7 +22,7 @@ import os
 def home(request):
     return render(request, 'home.html', locals())
 
-def redirect_to_home(request):
+def redirectToHome(request):
     return HttpResponseRedirect('/index/')
 
 def login(request, user=None):

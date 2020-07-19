@@ -37,6 +37,7 @@ def fetch_df():
     new_df.columns = ['Ticker', 'StockName']
     new_df['Sector'] = df['產業別']
     print(new_df)
+
     return new_df
 
 def fetch():
