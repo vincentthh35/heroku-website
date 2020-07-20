@@ -26,7 +26,20 @@
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#stock_list_table').DataTable();
+        $('#stock_list_table').DataTable({
+            "language": {
+                "lengthMenu":   "每頁顯示 _MENU_ 筆資料",
+                "zeroRecords":  "沒有符合的結果",
+                "search":       "搜尋:"
+                "info":         "目前是第 _PAGE_ 頁，共 _PAGES_ 頁",
+                "paginate": {
+                    "first": "第一頁",
+                    "previous": "上一頁",
+                    "next": "下一頁",
+                    "last": "最後一頁"
+                }
+            }
+        });
     } );
 </script>
 {% endblock %}

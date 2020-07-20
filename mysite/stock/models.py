@@ -10,13 +10,13 @@ class StockInfo(models.Model):
         return f'{self.ticker} {self.stock_name}'
 
 class HistoricalPrices(models.Model):
-    date = models.DateField()
+    date = models.DateField(verbose_name='日期')
     stock_info = models.ForeignKey(StockInfo, on_delete=models.CASCADE)
-    open = models.FloatField()
-    high = models.FloatField()
-    low = models.FloatField()
-    close = models.FloatField()
-    volume = models.DecimalField(max_digits=20, decimal_places=0)
+    open = models.FloatField(verbose_name='開盤價')
+    high = models.FloatField(verbose_name='(當日)最高價')
+    low = models.FloatField(verbose_name='(當日)最低價')
+    close = models.FloatField(verbose_name='收盤價')
+    volume = models.DecimalField(max_digits=20, decimal_places=0, verbose_name='交易量')
 
     def __str__(self):
         return f'{self.date}: {self.ticker}'
