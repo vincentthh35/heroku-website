@@ -15,20 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from accounts.views import hello_world, home, redirectToHome, login, logout, signup, activate
-from stock.views import query, showStockList
+from accounts.views import hello_world, home, redirectToHome
+from stock.views import query, showStockList, filterStock
 from django.views.generic import TemplateView
+
+# handler for 404 error and 500 error
+handler404 = 'mysite.views.custom404View'
+handler500 = 'mysite.views.custom500View'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/login/', login, name='login'),
-    path('accounts/logout/', logout, name='logout'),
-    path('accounts/signup/', signup, name='signup'),
-    re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-            activate, name="activate"),
+    path('accounts/', include('accounts.urls')),
     path('index/', home),
     path('', redirectToHome),
     path('feature/stock_list/', showStockList),
+    path('feature/filter_stock/', filterStock),
     # path('query/', query, name='query')
     # path('', TemplateView.as_view(template_name='main_template.html'))
 ]
