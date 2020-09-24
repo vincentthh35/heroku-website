@@ -12,3 +12,4 @@ python-dotenv
 sendgrid
 django-tables2
 tqdm
+APScheduler
