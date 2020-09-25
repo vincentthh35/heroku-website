@@ -22,7 +22,7 @@ StockRecord.objects.filter(variable='value').exists()
 
 RANKING_SIZE = 25
 
-sched = BlockingScheduler()
+sched = BlockingScheduler({'apscheduler.timezone': 'Asia/Taipei'})
 
 # every 2pm on weekdays
 # Ranking Part
