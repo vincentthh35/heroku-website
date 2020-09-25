@@ -34,7 +34,7 @@ def getBuiltInRankings():
     # check validity of data
     stock = stock_list[0]
     ticker = yf.Ticker(f'{stock.ticker}.TW')
-    his = ticker.history(period='1d')
+    his = ticker.history(period='1d', actions=False)
     # valid
     if datetime.today().date() == his.index[0]:
         rise = np.zeros(list_size)
@@ -44,7 +44,7 @@ def getBuiltInRankings():
         for i in range(list_size):
             stock = stock_list[i]
             ticker = yf.Ticker(f'{stock.ticker}.TW')
-            his = ticker.history(period='1d', action=False)
+            his = ticker.history(period='1d', actions=False)
             if his.empty:
                 continue
             # rise, fall, volume

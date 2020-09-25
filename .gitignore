@@ -5,3 +5,4 @@ db.sqlite3
 .env
 
 mysite/*/migrations/*
+mysite/templates/code_templates.md
