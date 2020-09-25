@@ -13,3 +13,4 @@ sendgrid
 django-tables2
 tqdm
 APScheduler
+django-extensions

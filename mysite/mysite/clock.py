@@ -3,12 +3,8 @@ import yfinance as yf
 from datetime import datetime
 import numpy as np
 
-# for ranking
-# usage: nlargest(k, array)
-from heapq import nlargest, nsmallest
-
 # import models
-from ..stock.models import StockRecord, StockInfo
+from stock.models import StockRecord, StockInfo
 
 '''
 ** find all objects
@@ -41,18 +37,20 @@ def getBuiltInRankings():
     his = ticker.history(period='1d')
     # valid
     if datetime.today().date() == his.index[0]:
-        rise = np.array(list_size)
-        fall = np.array(list_size)
-        volume = np.array(list_size)
+        rise = np.zeros(list_size)
+        fall = np.zeros(list_size)
+        volume = np.zeros(list_size)
 
         for i in range(list_size):
             stock = stock_list[i]
             ticker = yf.Ticker(f'{stock.ticker}.TW')
             his = ticker.history(period='1d', action=False)
+            if his.empty:
+                continue
             # rise, fall, volume
-            rise[i] = (his['Close'] - his['Open']) / his['Close']
+            rise[i] = (his['Close'][0] - his['Open'][0]) / his['Close'][0]
             fall[i] = -rise[i]
-            volume[i] = his['Volume']
+            volume[i] = his['Volume'][0]
 
         # sort
         top_rise = rise.argsort()[-RANKING_SIZE: ][ : : -1]
@@ -70,7 +68,7 @@ def getBuiltInRankings():
         StockRecord.objects.bulk_create([
             StockRecord(**{
                 'ranking_type': 'rise',
-                'stock_info': stock_list[ top_rise[i] ],
+                'stock_info': stock_list[ int(top_rise[i]) ],
                 'ranking_number': i + 1,
                 'last_modified': his.index[0]
             }) for i in range(RANKING_SIZE)
@@ -78,7 +76,7 @@ def getBuiltInRankings():
         StockRecord.objects.bulk_create([
             StockRecord(**{
                 'ranking_type': 'fall',
-                'stock_info': stock_list[ top_fall[i] ],
+                'stock_info': stock_list[ int(top_fall[i]) ],
                 'ranking_number': i + 1,
                 'last_modified': his.index[0]
             }) for i in range(RANKING_SIZE)
@@ -86,7 +84,7 @@ def getBuiltInRankings():
         StockRecord.objects.bulk_create([
             StockRecord(**{
                 'ranking_type': 'volume',
-                'stock_info': stock_list[ top_volume[i] ],
+                'stock_info': stock_list[ int(top_volume[i]) ],
                 'ranking_number': i + 1,
                 'last_modified': his.index[0]
             }) for i in range(RANKING_SIZE)
