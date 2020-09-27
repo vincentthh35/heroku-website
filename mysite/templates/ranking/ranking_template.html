@@ -1,0 +1,12 @@
+{% extends 'main_template.html' %}
+{% block content %}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{ ranking_title }} (紀錄時間：{{ last_modified }})</h6>
+    </div>
+    <div class="card-body">
+        {% load django_tables2 %}
+        {% render_table ranking_table %}
+    </div>
+</div>
+{% endblock %}

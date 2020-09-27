@@ -1,0 +1,18 @@
+{% extends 'main_template.html' %}
+
+
+
+{% block content %}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">排行種類</h6>
+    </div>
+    <div class="card-body">
+        <div class="list-group-flush">
+            {% for title, title_name in title_dict.items %}
+                <a href="/ranking/{{ title }}" class="list-group-item list-group-item-action">{{ title_name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

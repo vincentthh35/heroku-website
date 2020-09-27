@@ -11,14 +11,22 @@ class StockInfo(models.Model):
 
 # for built-in ranking methods and built-in filter methods
 class StockRecord(models.Model):
-    ranking_type = models.CharField(max_length=15, verbose_name='排行種類')
+    record_type = models.CharField(max_length=15, verbose_name='排行種類')
+    title_dict = {
+        'rise': '漲幅排行',
+        'fall': '跌幅排行',
+        'volume': '成交量排行',
+    }
     stock_info = models.ForeignKey(StockInfo, on_delete=models.CASCADE)
     # filter methods don't need this field
     ranking_number = models.DecimalField(max_digits=3, decimal_places=0, verbose_name='名次', blank=True)
     last_modified = models.DateField(null=True, verbose_name='紀錄日期')
 
     def __str__(self):
-        return f'[{self.ranking_type}] #{self.ranking_number}: {self.stock_info.ticker} {self.stock_info.stock_name}'
+        if self.ranking_number is None:
+            return f'[{self.record_type}]: {self.stock_info.ticker} {self.stock_info.stock_name}'
+        else:
+            return f'[{self.record_type}] #{self.ranking_number}: {self.stock_info.ticker} {self.stock_info.stock_name}'
 
 # (currently of no use)
 # for storing historical prices

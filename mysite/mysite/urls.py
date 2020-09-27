@@ -30,6 +30,7 @@ urlpatterns = [
     path('', redirectToHome),
     path('feature/stock_list/', showStockList),
     path('feature/filter_stock/', filterStock),
+    path('ranking/', include('ranking.urls'))
     # path('query/', query, name='query')
     # path('', TemplateView.as_view(template_name='main_template.html'))
 ]
