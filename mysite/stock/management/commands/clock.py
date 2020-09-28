@@ -4,7 +4,7 @@ from datetime import datetime
 import numpy as np
 
 # import models
-from mysite.stock.models import StockRecord, StockInfo
+from stock.models import StockRecord, StockInfo
 
 '''
 ** find all objects
