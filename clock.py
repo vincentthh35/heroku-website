@@ -3,6 +3,9 @@ import yfinance as yf
 from datetime import datetime
 import numpy as np
 
+import django
+django.setup()
+
 # import models
 from mysite.stock.models import StockRecord, StockInfo
 
