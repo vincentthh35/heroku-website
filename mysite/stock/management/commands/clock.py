@@ -3,9 +3,6 @@ import yfinance as yf
 from datetime import datetime
 import numpy as np
 
-import django
-django.setup()
-
 # import models
 from mysite.stock.models import StockRecord, StockInfo
 
@@ -99,4 +96,13 @@ def getBuiltInRankings():
     # his = ticker.history(period="__", interval="__", action=False)
     # value = abstract.Function(indicator_name, timeperiod=time_period)
 
-sched.start()
+# import
+from django.core.management.base import BaseCommand
+
+# Command class (the class name is fixed)
+class Command(BaseCommand):
+    help = 'for heroku run clock.py'
+
+    # command method (the function name is fixed)
+    def handle(self, *args, **options):
+        sched.start()
