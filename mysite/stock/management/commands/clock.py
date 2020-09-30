@@ -58,10 +58,9 @@ def getBuiltInRankings():
         top_volume = volume.argsort()[-RANKING_SIZE: ][ : : -1]
 
         # delete old records
-        # consider deleting all of them?
-        StockRecord.objects.filter(ranking_type='rise').delete()
-        StockRecord.objects.filter(ranking_type='fall').delete()
-        StockRecord.objects.filter(ranking_type='volume').delete()
+        # consider deleting all of them? yes?
+        if StockRecord.objects.all().exists:
+            StockRecord.objects.all().delete()
 
         # store data into database
         # Model.objects.bulk_create([ Model(**{variable: value, ...}) for m in list ])
