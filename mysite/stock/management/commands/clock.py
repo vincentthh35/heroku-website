@@ -48,7 +48,7 @@ def getBuiltInRankings():
             if his.empty:
                 continue
             # rise, fall, volume
-            rise[i] = (his['Close'][0] - his['Open'][0]) / his['Close'][0]
+            rise[i] = (his['Close'][0] - his['Open'][0]) / his['Open'][0]
             fall[i] = -rise[i]
             volume[i] = his['Volume'][0]
 
