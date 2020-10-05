@@ -66,7 +66,7 @@ def getBuiltInRankings():
         # Model.objects.bulk_create([ Model(**{variable: value, ...}) for m in list ])
         StockRecord.objects.bulk_create([
             StockRecord(**{
-                'ranking_type': 'rise',
+                'record_type': 'rise',
                 'stock_info': stock_list[ int(top_rise[i]) ],
                 'ranking_number': i + 1,
                 'last_modified': his.index[0]
@@ -74,7 +74,7 @@ def getBuiltInRankings():
         ])
         StockRecord.objects.bulk_create([
             StockRecord(**{
-                'ranking_type': 'fall',
+                'record_type': 'fall',
                 'stock_info': stock_list[ int(top_fall[i]) ],
                 'ranking_number': i + 1,
                 'last_modified': his.index[0]
@@ -82,7 +82,7 @@ def getBuiltInRankings():
         ])
         StockRecord.objects.bulk_create([
             StockRecord(**{
-                'ranking_type': 'volume',
+                'record_type': 'volume',
                 'stock_info': stock_list[ int(top_volume[i]) ],
                 'ranking_number': i + 1,
                 'last_modified': his.index[0]
