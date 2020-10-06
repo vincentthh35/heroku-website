@@ -16,6 +16,21 @@ https://stackoverflow.com/questions/60030447/django-dynamic-url-pattern-based-on
 '''
 
 class RankingTable(tables.Table):
+    def __init__(self, data, *args, **kwargs):
+        if 'record_type' in kwargs:
+            '''
+            could only add columns by base_columns
+            (even if added by function)
+            '''
+            self.base_columns['remark'] = tables.Column(
+                accessor='remark',
+                verbose_name=f'{StockRecord.remark_dict[kwargs["record_type"]]}'
+            )
+        super().__init__(data)
+
+    # def addRemark(self, record_type):
+    #     self.remark = tables.Column(accessor='remark', verbose_name=f'{StockRecord.remark_dict[ record_type ]}')
+    #     self.base_columns['test'] = tables.Column(accessor='stock_info.sector')
     class Meta:
         model = StockRecord
         # modify table attributes here
@@ -36,7 +51,7 @@ class RankingView(TemplateView):
         ranking_list = StockRecord.objects.filter(record_type=self.record_type)
         if ranking_list.exists():
             context['last_modified'] = ranking_list[0].last_modified
-        table = RankingTable(ranking_list)
+        table = RankingTable(ranking_list, record_type=self.record_type)
         context['ranking_table'] = table
         context['ranking_title'] = StockRecord.title_dict[self.record_type]
         return context

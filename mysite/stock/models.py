@@ -17,9 +17,15 @@ class StockRecord(models.Model):
         'fall': '跌幅排行',
         'volume': '成交量排行',
     }
+    remark_dict = {
+        'rise': '漲幅',
+        'fall': '跌幅',
+        'volume': '成交量'
+    }
     stock_info = models.ForeignKey(StockInfo, on_delete=models.CASCADE)
     # filter methods don't need this field
     ranking_number = models.DecimalField(max_digits=3, decimal_places=0, verbose_name='名次', blank=True)
+    remark = models.CharField(max_length=10, blank=True)
     last_modified = models.DateField(null=True, verbose_name='紀錄日期')
 
     def __str__(self):
