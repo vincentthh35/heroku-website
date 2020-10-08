@@ -70,7 +70,7 @@ def getBuiltInRankings():
                 'stock_info': stock_list[ int(top_rise[i]) ],
                 'ranking_number': i + 1,
                 'last_modified': his.index[0],
-                'remark': f'{rise[ int(top_rise[i]) ]}%'
+                'remark': f'{round( rise[ int(top_rise[i]) ], 4 ) * 100}%'
             }) for i in range(RANKING_SIZE)
         ])
         StockRecord.objects.bulk_create([
@@ -79,7 +79,7 @@ def getBuiltInRankings():
                 'stock_info': stock_list[ int(top_fall[i]) ],
                 'ranking_number': i + 1,
                 'last_modified': his.index[0],
-                'remark': f'{fall[ int(top_fall[i]) ]}%'
+                'remark': f'{round( fall[ int(top_fall[i]) ], 4 ) * 100}%'
             }) for i in range(RANKING_SIZE)
         ])
         StockRecord.objects.bulk_create([
