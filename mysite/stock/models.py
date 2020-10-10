@@ -25,7 +25,7 @@ class StockRecord(models.Model):
     stock_info = models.ForeignKey(StockInfo, on_delete=models.CASCADE)
     # filter methods don't need this field
     ranking_number = models.DecimalField(max_digits=3, decimal_places=0, verbose_name='名次', blank=True)
-    remark = models.CharField(max_length=10, blank=True)
+    remark = models.CharField(max_length=20, blank=True)
     last_modified = models.DateField(null=True, verbose_name='紀錄日期')
 
     def __str__(self):
