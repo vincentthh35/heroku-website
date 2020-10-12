@@ -54,7 +54,7 @@ def getBuiltInRankings():
 
         # sort
         top_rise = rise.argsort()[-RANKING_SIZE: ][ : : -1]
-        top_fall = fall.argsort()[:RANKING_SIZE]
+        top_fall = fall.argsort()[-RANKING_SIZE: ][ : : -1]
         top_volume = volume.argsort()[-RANKING_SIZE: ][ : : -1]
 
         # delete old records
@@ -70,7 +70,7 @@ def getBuiltInRankings():
                 'stock_info': stock_list[ int(top_rise[i]) ],
                 'ranking_number': i + 1,
                 'last_modified': his.index[0],
-                'remark': f'{round( rise[ int(top_rise[i]) ], 4 ) * 100}%'
+                'remark': f'{round( rise[ int(top_rise[i]) ] * 100, 2 )}%'
             }) for i in range(RANKING_SIZE)
         ])
         StockRecord.objects.bulk_create([
@@ -79,7 +79,7 @@ def getBuiltInRankings():
                 'stock_info': stock_list[ int(top_fall[i]) ],
                 'ranking_number': i + 1,
                 'last_modified': his.index[0],
-                'remark': f'{round( fall[ int(top_fall[i]) ], 4 ) * 100}%'
+                'remark': f'{round( fall[ int(top_fall[i]) ] * 100, 2 )}%'
             }) for i in range(RANKING_SIZE)
         ])
         StockRecord.objects.bulk_create([
