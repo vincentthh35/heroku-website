@@ -26,7 +26,7 @@ sched = BlockingScheduler({'apscheduler.timezone': 'Asia/Taipei'})
 
 # every 2pm on weekdays
 # Ranking Part
-@sched.scheduled_job('cron', day_of_week='mon-fri', hour='14-15')
+@sched.scheduled_job('cron', day_of_week='mon-fri', hour='14-20')
 def getBuiltInRankings():
     stock_list = StockInfo.objects.all()
     list_size = len(stock_list)
