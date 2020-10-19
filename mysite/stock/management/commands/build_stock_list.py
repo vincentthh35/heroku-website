@@ -1,7 +1,6 @@
 import requests
 import pandas as pd
-import os
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from stock.models import StockInfo
 
 class Command(BaseCommand):

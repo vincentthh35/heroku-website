@@ -4,8 +4,9 @@ from datetime import datetime
 import numpy as np
 from tqdm import tqdm
 
+
 # import models
-from stock.models import StockRecord, StockInfo
+from mysite.stock.models import StockRecord, StockInfo
 
 '''
 ** find all objects
@@ -23,7 +24,7 @@ StockRecord.objects.filter(variable='value').exists()
 
 RANKING_SIZE = 25
 
-sched = BlockingScheduler()
+sched = BlockingScheduler({'apscheduler.timezone': 'Asia/Taipei'})
 
 # every 2pm on weekdays
 # Ranking Part
@@ -67,7 +68,7 @@ def run():
     StockRecord.objects.bulk_create([
         StockRecord(**{
             'ranking_type': 'rise',
-            'stock_info': stock_list[ int(top_rise[i]) ],
+            'stock_info': stock_list[ int(top_rise[i]) ], # from int64 to int
             'ranking_number': i + 1,
             'last_modified': his.index[0]
         }) for i in range(RANKING_SIZE)

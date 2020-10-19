@@ -5,10 +5,6 @@ import os
 from django.core.management.base import BaseCommand
 from stock.models import StockInfo, HistoricalPrices
 
-
-
-
-
 class Command(BaseCommand):
     help = 'build the historical data of stock(s)'
 
